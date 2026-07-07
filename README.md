@@ -2,7 +2,6 @@
 glpi logo change of 10 versions 
 **First go to location administrator->Entitys-> UI customaization ....then code is pasted here
 **
-/* ১. লগইন পেজের লোগো */
 .login-box .logo-glpi, div#logo_login {
     background-image: url('http://192.168.1.66/logo/Logo.jpg') !important;
     background-size: contain !important;
@@ -12,7 +11,6 @@ glpi logo change of 10 versions
     width: 100%;
 }
 
-/* ২. বাম পাশের সাইডবারের GLPI লোগো হাইড করার জন্য */
 .logo-full, 
 .logo-mini, 
 .brand-text,
@@ -21,7 +19,6 @@ glpi logo change of 10 versions
     display: none !important;
 }
 
-/* ৩. সাইডবারে আপনার নতুন লোগোটি বসানোর জন্য */
 .sidebar-brand, 
 .brand-link, 
 .navbar-brand {
