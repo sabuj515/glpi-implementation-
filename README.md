@@ -32,3 +32,9 @@ glpi logo change of 10 versions
     padding-left: 15px !important;
     min-height: 50px !important;
 }
+
+
+database backup and restore command is here 
+mysql -u glpi -p'your_pass' glpidb > data/glpi_data.sql (it's backup rule)
+mysql -u glpi -p'your_pass' glpidb < data/glpi_data.sql (it's restore rule)
+
