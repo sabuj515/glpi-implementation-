@@ -35,3 +35,34 @@ database backup and restore command is here
 mysql -u glpi -p'your_pass' glpidb > data/glpi_data.sql (it's backup rule)
 mysql -u glpi -p'your_pass' glpidb < data/glpi_data.sql (it's restore rule)
 
+auto backup rule ----
+step1: /data/backup    (create a directory )        
+Step2:  vi glpi_autoback.sh
+then paste the below line..
+
+#!/bin/bash
+BACKUP_DIR="data/glpi_backups"
+DB_USER="glpi"
+DB_PASS="Qatl@0751"
+DB_NAME="glpidb"
+DATE=$(date +%F_%H-%M-%S)
+FILENAME="${BACKUP_DIR}/glpi_backup_${DATE}.sql"
+
+mysqldump -u ${DB_USER} -p"${DB_PASS}" --no-tablespaces ${DB_NAME} > ${FILENAME}
+
+if [ $? -eq 0 ]; then
+    echo "[$(date)] Backup successfully created: ${FILENAME}" >> ${BACKUP_DIR}/backup_log.log
+else
+    echo "[$(date)] Backup FAILED!" >> ${BACKUP_DIR}/backup_log.log
+fi
+
+find ${BACKUP_DIR} -type f -name "*.sql" -mtime +30 -exec rm {} \;  (This execute the line deleted backup  After 30 days)  
+
+Step3: chmod -x glpi_autoback.sh
+step4: 0 2 */2 * * data/glpi_backups/glpi_autoback.sh >/dev/null 2>&1 
+💡 এই টাইমিংটার মানে কী?
+    0 2 = রাত ২:০০ টার সময় ব্যাকআপটি রান হবে (যখন সার্ভারে ইউজারদের চাপ কম থাকে)।
+    */2 = প্রতি ২ দিন পর পর (Every 2 days)।
+Done 
+
+
